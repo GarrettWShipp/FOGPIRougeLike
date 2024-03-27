@@ -3,20 +3,20 @@
 #include "fogpi/Math.hpp"
 #include "Room.hpp"
 #include <string>
-#include <random>
-#include <time.h>
+#include "Entity.hpp"
+#include "Goblin.hpp"
 
+//stats
 
-int rollDice(int max, int min)
-{
-    int dice;
-    dice = rand() % (max - min + 1) + 1;
-    return dice;
-}
-int Health = 10;
 void Player::Start()
 {
     m_character = 'P';
+    con = stats.constitution = 5.0f;
+    dex = stats.dexterity = 5.0f;
+    minHealth = stats.minHealth = 5.0f;
+    str = stats.strength = 5.0f;
+    health = stats.minHealth;
+    gold = stats.gold = rollDice(3,0);
     
 }
 void Player::Update()
@@ -71,20 +71,54 @@ void Player::Update()
         m_position += direction;
     //battle enemy
     if (room->GetLocation(m_position + direction) == 'V' || room->GetLocation(m_position + direction) == 'G')
-    {
-        int attack = rollDice(20, 0);
+    {  
+        std::vector<Enemy> &enemies = room->GetMonsters();
+        
 
-        if(attack >= 10)
+        for(int x = 0; x < enemies.size(); x++)
         {
-            room->ClearLocation(m_position + direction);
-            printf("current health:%i", Health);
-            
-        }
-        if(attack < 10)
-        {
-            Health -= 1;
-            printf("health:%i\n", Health);
-            
+            if(enemies[x].pos == m_position + direction)
+            {
+                                                       
+                float enemyDex = enemies[x].stats.dexterity;
+                float enemyStr = enemies[x].stats.strength;
+                float enemyHealth = enemies[x].stats.health;
+                float enemyDmg = enemies[x].stats.dmg;
+                int enemyGold = enemies[x].stats.gold;
+
+                Attack(dex, str);
+                if(enemyDex < hit)
+                {
+                    enemyHealth -= dmg;
+                    hit = 0.0f;
+                    
+                } 
+                enemies[x].Attack(enemyDex, enemyStr);
+                {
+                    health -= enemyDmg;
+                    enemies[x].stats.hit = 0.0f;
+                }
+                if(health > 0)
+                {
+                    printf("Your health is %i\n", health);
+                }
+                if(health <= 0)
+                {
+                    printf("You Died");
+                    room->ClearLocation(m_position);
+                }
+                if(enemyHealth > 0)
+                {
+                    printf("Enemies health is %f\n", enemyHealth);
+                }
+                if(enemyHealth <= 0)
+                {
+                    room->ClearLocation(enemies[x].pos);
+                    gold += enemyGold;
+                    printf("You got %i gold\n", enemyGold);
+                }
+                
+            }
         }
     }
 }
