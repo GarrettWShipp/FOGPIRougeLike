@@ -10,13 +10,14 @@
 #include "Entity.hpp"
 void Enemy::Start()
 {
-    SetCharacter('G');
+    //SetCharacter('G');
+    m_character = 'G';
     stats.constitution = rollDice(6,0);
-    stats.dexterity = 5.0f;
+    stats.dexterity = 10.0f;
     stats.minHealth = 10.0f;
     stats.strength = 3.0f;
     stats.health = stats.minHealth;
-    stats.dmg = 0.0f;
+    stats.dmg = 2.0f;
     stats.hit = 0.0f;
     stats.gold = rollDice(10, 1);
 }
