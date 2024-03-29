@@ -1,7 +1,6 @@
 #include "Room.hpp"
 
 #include "Player.hpp"
-
 #include <fstream>
 #include <string>
 
@@ -9,6 +8,7 @@ void Room::Load(std::string _path)
 {
     m_map.clear();
     m_doors.clear();
+    m_enemy.clear();
 
     std::ifstream file;
     file.open(_path);
@@ -90,6 +90,15 @@ void Room::Load(std::string _path)
                     m_doors[doorCount].pos.y = y;
                     doorCount++;
                 }
+            }
+
+            if(m_map[y][x] == 'G' || m_map[y][x] == 'V')
+            {
+                Enemy e = {};
+                //e.SetCharacter(m_map[y][x]);
+                e.Start();
+                e.pos = Vector2D(x, y);
+                m_enemy.push_back(e);
             }
         }
     }
