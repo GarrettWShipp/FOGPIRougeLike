@@ -1,4 +1,4 @@
-
+/*
 #include "Room.hpp"
 
 #include "Enemy.hpp"
@@ -18,6 +18,7 @@ void Goblin::Start()
     m_character = 'G';
     con = stats.constitution = rollDice(6,0);
     dex = stats.dexterity = 8.0f;
+    printf("dex: %f stats.dex: %f \n", dex, stats.dexterity);
     minHealth = stats.minHealth = 2.0f;
     str = stats.strength = 3.0f;
     health = stats.minHealth;
@@ -28,4 +29,4 @@ void Goblin::Start()
 void Goblin::Update()
 {
     
-}
+}*/

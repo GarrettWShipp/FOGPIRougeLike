@@ -95,6 +95,8 @@ void Room::Load(std::string _path)
             if(m_map[y][x] == 'G' || m_map[y][x] == 'V')
             {
                 Enemy e = {};
+                e.SetCharacter(m_map[y][x]);
+                e.Start();
                 e.pos = Vector2D(x, y);
                 m_enemy.push_back(e);
             }

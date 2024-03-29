@@ -8,6 +8,7 @@ public:
     Vector2D pos;
     void Start();
     void Update();
+    void SetCharacter(char enemy);
     
     
 };

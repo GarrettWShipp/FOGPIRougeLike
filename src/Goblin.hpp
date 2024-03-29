@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 
 #include "Enemy.hpp"
 
@@ -13,6 +13,4 @@ public:
     float dmg = 0.0f;
     int health = 0;
     int gold = 0;
-    void Start();
-    void Update();
-};
+};*/

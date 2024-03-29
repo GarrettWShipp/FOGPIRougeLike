@@ -8,7 +8,7 @@
 #include <time.h>
 
 
-int rollDice(int max, int min)
+/*int rollDice(int max, int min)
 {
     int dice;
     dice = rand() % (max - min + 1) + 1;
@@ -33,3 +33,4 @@ void Enemy::Update()
 
     //Death
 }
+*/

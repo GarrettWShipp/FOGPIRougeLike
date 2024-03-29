@@ -10,7 +10,7 @@ class Entity {
 public:
     Room* room;
     Stats stats;
-    float Attack(float dex, float str);
+    void Attack(float dex, float str);
     int rollDice(int max, int min);
     void Init(unsigned int _x, unsigned int _y) { m_position = Vector2D(_x, _y); }
 

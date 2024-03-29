@@ -4,14 +4,10 @@
 #include <random>
 #include <time.h>
 
-float Entity::Attack(float dex, float str)
+void Entity::Attack(float dex, float str)
 {
-    
-    float hit = stats.hit = rollDice(dex, 0);
-    float dmg = stats.dmg = rollDice(str, 1);
-    return hit;
-    return dmg;
-
+    stats.hit = rollDice(dex, 0);
+    stats.dmg = rollDice(str, 1);
 }
 
 int Entity::rollDice(int max, int min)
